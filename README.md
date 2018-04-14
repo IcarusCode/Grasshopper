@@ -1,2 +1,2 @@
 # Grasshopper
-Icarus Codebasee for Grasshopper (Rhinoceros Extension)
+Codebase for Grasshopper (extension of Rhinoceros)
