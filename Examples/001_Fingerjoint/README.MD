@@ -1,0 +1,63 @@
+### Finger joints example
+
+Ο παρακάτω κώδικας χρησιμοποιείται για τον καθορισμό μιας εγκοπής στο ένα από δυο συμπληρωματικά κομμάτια υλικού με σκοπό την μεταξύ τους ένωση. Σαν μεταβλητές εισόδου δέχεται μια καμπύλη, μια σειρά μεταβλητών που έχουν να κάνουν με την ανοικοδόμηση της καμπύλης (rebuild curve), μια μεταβλητή που ρυθμίζει τον αριθμό των εγκοπών, μια μεταβλητή τύπου bool που ρυθμίζει την κατεύθυνση των εγκοπών και μια μεταβλητή που καθορίζει το πάχος του υλικού και αντίστοιχα το μέγεθος των εγκοπών. Σαν έξοδος δίνεται σε μορφή συνεχόμενης καμπύλης η εγκοπή.   
+
+**Μεταβλητές εισόδου:**
+
+curve – Καμπύλη ένωσης των δυο κομματιών
+degree, count, tangents (rebuild curve) – Μεταβλητές ανοικοδόμησης καμπύλης 
+divides – Μεταβλητή που ρυθμίζει τον αριθμό των εγκοπών 
+Boolean – μεταβλητή για τον καθορισμό της φοράς των εγκοπών 
+Material – Μεταβλητή για το πάχος του υλικού 
+
+**Μεταβλητή εξόδου:**
+
+curveJoin – Εγκοπή σε μορφή συνεχούς καμπύλης 
+
+**Κώδικας:**
+```
+import rhinoscriptsyntax as rs
+import ghpythonlib.components as ghc
+import math
+
+curveRebuild=ghc.RebuildCurve(curve1,degree,count,tangents)
+
+lengthCurve1=ghc.Length(curveRebuild)
+
+lengthCurve1Div=ghc.Division(lengthCurve1,divides)
+
+pattern=ghc.Division(lengthCurve1Div,2)
+curve1DashPat=ghc.DashPattern(curveRebuild,pattern)
+curveDash=ghc.ListItem(curve1DashPat,0,False)
+curveGap=ghc.ListItem(curve1DashPat,1,False)
+
+if (boolean==True):
+    disp=-1.0
+elif (boolean==False):
+    disp=1.0 
+
+materialThick=ghc.Multiplication(disp,material)
+
+p0=ghc.ConstructPoint(1000,1000)
+p1=ghc.ConstructPoint(-1000,1000)
+p2=ghc.ConstructPoint(-1000,-1000)
+p3=ghc.ConstructPoint(1000,-1000)
+surface_1=ghc.x4PointSurface(p0,p1,p2,p3)
+
+curveOffset=ghc.OffsetonSrf(curveDash,materialThick,surface_1)
+
+curveDash_start=ghc.EndPoints(curveDash).start
+curveDash_end=ghc.EndPoints(curveDash).end
+
+curveOffset_start=ghc.EndPoints(curveOffset).start
+curveOffset_end=ghc.EndPoints(curveOffset).end
+
+curveCon_start=ghc.Line(curveDash_start,curveOffset_start)
+curveCon_end=ghc.Line(curveDash_end,curveOffset_end)
+
+curveAll_a=ghc.Merge(curveGap,curveCon_start)
+curveAll_b=ghc.Merge(curveOffset,curveCon_end)
+
+curveAll=ghc.Merge(curveAll_a,curveAll_b)
+curveJoin=ghc.JoinCurves(curveAll,False)
+```
