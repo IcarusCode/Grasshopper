@@ -1,7 +1,7 @@
 # Icarus Grasshopper Codebase
 This is the Icarus Codebase for Grasshopper (extension of Rhinoceros)
 
-![Icarus Logo](/Graphics/Logo/Logo.png)
+# <img src="/Graphics/Logo/Logo.png" width="200">
 
 ## Contents:
 
