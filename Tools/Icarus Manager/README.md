@@ -6,5 +6,11 @@ Icarus Manager for Grasshopper is a Python application built using the tkinter g
 Icarus Manager helps speed up the Grasshopper Python programming process by allowing the user to select snipets of code from the
 Icarus codebase and automatically inject them in the Grasshopper code editor.
 
-## Instructions:
+## Instructions
 Download and run the Icarus Manager .exe from above (compiled using pyinstaller), or download and run IcarusManager.py if you have Python 3 installed.
+
+## Constributing
+The Icarus Manager code is documented with comments and is written in a way to allow the addition of code snipets easily. Feel free to fork the repository and contribute your own snipets to Icarus Manager.
+
+## Resources
+Resource on PyInstaller: https://mborgerson.com/creating-an-executable-from-a-python-script/
