@@ -9,7 +9,7 @@ Icarus codebase and automatically inject them in the Grasshopper code editor.
 ## Instructions
 Download and run the Icarus Manager .exe from above (compiled using pyinstaller), or download and run IcarusManager.py if you have Python 3 installed.
 
-## Constributing
+## Contributing
 The Icarus Manager code is documented with comments and is written in a way to allow the addition of code snipets easily. Feel free to fork the repository and contribute your own snipets to Icarus Manager.
 
 ## Resources
